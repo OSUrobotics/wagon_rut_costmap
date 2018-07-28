@@ -26,7 +26,7 @@ bool update_filename_load()
   bool result;
   fstream file;
   // ofstream file_out;
-  file.open("/home/strider/catkin_ws/src/simple_costmap_layer/world_files/filename.txt", ios::in);
+  file.open("/home/strider/catkin_ws/src/wagon_rut_costmap/maps/filename.txt", ios::in);
   string content;
 
   file >> content;
@@ -119,9 +119,9 @@ namespace wagon_rut_costmap_namespace
     // nh.param("map_a", map_a, true);
     map_a = update_filename_load();
     if (map_a) { //change back to map_a
-      file_name = "/home/strider/catkin_ws/src/simple_costmap_layer/world_files/map_b.pgm";
+      file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm";
     } else {
-      file_name = "/home/strider/catkin_ws/src/simple_costmap_layer/world_files/map_a.pgm";
+      file_name = "/home/strider/catkin_ws/src/wagon_rut_cstmap/maps/map_a.pgm";
     }
     ROS_INFO_STREAM(file_name);
   }
