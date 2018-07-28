@@ -1,0 +1,34 @@
+<!--Simple XML For CustomLayer  -->
+<!-- <library path="lib/libcustom_layer">
+  <class type="wagon_rut_costmap_namespace::CustomLayer" base_class_type="costmap_2d::Layer">
+    <description>Demo Layer that adds a point 1 meter in front of the robot</description>
+  </class>
+</library> -->
+
+<class_libraries>
+  <library path="lib/libwagon_rut_costmap">
+		<class type="wagon_rut_costmap_namespace::SimpleLayer" base_class_type="costmap_2d::Layer">
+	    <description>Demo Layer that adds a point 1 meter in front of the robot</description>
+	  </class>
+  </library>
+  <library path="/lib/libgrid_layer">
+    <class type="wagon_rut_costmap_namespace::GridLayer" base_class_type="costmap_2d::Layer">
+      <description>Demo Layer that marks all points that were ever one meter in front of the robot as lethal</description>
+    </class>
+  </library>
+  <library path="/lib/libefface_current_pose">
+    <class type="wagon_rut_costmap_namespace::EffaceLayer" base_class_type="costmap_2d::Layer">
+      <description>Layer that decreases the cost of the robot's current position on the global costmap</description>
+    </class>
+  </library>
+  <library path="/lib/libcompress_cost_range">
+    <class type="wagon_rut_costmap_namespace::CompressLayer" base_class_type="costmap_2d::Layer">
+      <description>Layer that compresses the range of potential costs</description>
+    </class>
+  </library>
+  <library path="/lib/libload_old_map">
+    <class type="wagon_rut_costmap_namespace::LoadOldLayer" base_class_type="costmap_2d::Layer">
+      <description>Layer that loads in the most recent previous costmap</description>
+    </class>
+  </library>
+</class_libraries>

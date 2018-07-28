@@ -1,0 +1,14 @@
+ global_costmap:
+   global_frame: /map
+   robot_base_frame: /base_footprint
+   update_frequency: 10.0
+   publish_frequency: 0.5
+   static_map: true
+   transform_tolerance: 0.5
+   plugins: #Comment out layers below to disable them. Effacement layer won't work properly if compression layer is disabled. The load_old_map layer will reload the previously saved costmap. In order for this to work, run the node once without the load_old_map layer before including it.
+    - {name: static_layer,            type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer,          type: "costmap_2d::VoxelLayer"}
+    - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}
+    - {name: compress_cost_range,     type: "wagon_rut_costmap_namespace::CompressLayer"}
+    - {name: load_old_map,            type: "wagon_rut_costmap_namespace::LoadOldLayer"}
+    - {name: efface_current_pose,     type: "wagon_rut_costmap_namespace::EffaceLayer"}
