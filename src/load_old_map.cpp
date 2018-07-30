@@ -30,13 +30,13 @@ bool update_filename_load()
 vector<string> vector_of_costs(bool map_a, string file_name)
 {
   vector<string> costs;
-  ifstream file; 
+  ifstream file;
   file.open(file_name);
   std::string content( (std::istreambuf_iterator<char>(file) ),
                        (std::istreambuf_iterator<char>()    ) );
   string num;
   stringstream str(content);
-  while (!str.eof()) 
+  while (!str.eof())
   {
     str >> num;
     costs.push_back(num);
@@ -83,27 +83,27 @@ namespace wagon_rut_costmap_namespace
 
     // This block of code determines which file the costmap is read in from
     map_a = update_filename_load();
-    if (map_a) { 
+    if (map_a) {
       file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm";
     } else {
-      file_name = "/home/strider/catkin_ws/src/wagon_rut_cstmap/maps/map_a.pgm";
+      file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm";
     }
   }
 
   //Necessary function for all costmap layers
-  void LoadOldLayer::matchSize() 
+  void LoadOldLayer::matchSize()
   {
     Costmap2D* master = layered_costmap_->getCostmap();
     resizeMap(master->getSizeInCellsX(), master->getSizeInCellsY(), master->getResolution(),
               master->getOriginX(), master->getOriginY());
   }
-  
+
   //Necessary function for all costmap layers
   void LoadOldLayer::reconfigureCB(costmap_2d::GenericPluginConfig &config, uint32_t level)
   {
     enabled_ = config.enabled;
   }
-  
+
   //Updates bounds of area to be changed to be the entire map
   void LoadOldLayer::updateBounds(double robot_x, double robot_y, double robot_yaw, double* min_x, double* min_y, double* max_x, double* max_y)
   {

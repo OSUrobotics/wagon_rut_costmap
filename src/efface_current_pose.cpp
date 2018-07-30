@@ -85,7 +85,7 @@ void EffaceLayer::movement_callback(const geometry_msgs::Twist& twist)
 }
 
 //This is a necessary function for every costmap layer
-void EffaceLayer::matchSize() 
+void EffaceLayer::matchSize()
 {
   Costmap2D* master = layered_costmap_->getCostmap();
   resizeMap(master->getSizeInCellsX(), master->getSizeInCellsY(), master->getResolution(),
@@ -97,7 +97,7 @@ void EffaceLayer::reconfigureCB(costmap_2d::GenericPluginConfig &config, uint32_
 {
   enabled_ = config.enabled;
 }
-    
+
 //This function sets the cost in this layer of the costmap to 20 at the current location of the robot, with a linearly decreasing cost around the robot's point.
 //It also changes the bounds being updated in the costmap to be the entire map.
 void EffaceLayer::updateBounds(double robot_x, double robot_y, double robot_yaw, double* min_x,
@@ -119,13 +119,13 @@ void EffaceLayer::updateBounds(double robot_x, double robot_y, double robot_yaw,
     setCost(mx, my, 20); //Sets the value to 20 in this location on the layer
 
 
-    for (int i = 2; i < 5; i++) {
+    for (int i = 1; i < 5; i++) {
       for (int t = 0; t < 360; t++) {
         double rad = t * 0.0174533;
         int x = mx + i * cos(rad);
         int y = my + i * sin (rad);
         if (t > 175 & t < 185) {
-          setCost(x, y, 0);
+          setCost(x, y, 20);
         } else {
           setCost(x, y, -4*i + 20); //Sets up a decreasing cost radiating out from the robot starting from 20 at the point of the robot
         }
@@ -157,8 +157,8 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
         continue;
       }
 
-      int old_cost = master_grid.getCost(i, j);
-      if ((old_cost - costmap_[index]) < 0) {
+      int old_cost = master_grid.getCost(i, j); //Doesn't seem to be updating really
+      if ((old_cost - costmap_[index]) < 0) { //Possibly because of that
         continue;
       } else if (old_cost > LETHAL_OBSTACLE - 20) {
         continue;
