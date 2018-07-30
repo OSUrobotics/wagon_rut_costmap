@@ -5,6 +5,7 @@ This repository implements a "wagon rut" layer for the ROS navigation stack cost
 
 
 Use:
+
 In order to use this costmap layer, clone this repository into a catkin workspace. It depends on the packages catkin, costmap_2d, dynamic_reconfigure, pluginlib, roscpp, and stage_ros.
 
 To see how it works, launch the turtlebot_costmap_nav.launch file. Make sure that you change the file paths in both src/efface_current_pose.cpp and src/load_old_map.cpp to the locations of map_a.pgm, map_b.pgm, and filename.txt in the maps folder. After doing this, the above launch file will allow you to try out the wagon rut layer on the simple Stage maze with some previous wagon ruts already in place.
@@ -15,6 +16,7 @@ http://wiki.ros.org/turtlebot_stage/Tutorials/indigo/Customizing%20the%20Stage%2
 
 
 Repository Organization:
+
 This repository contains the setup and code for three ROS costmap layers:
 Compression Layer: Compresses the range of possible costs on the costmap from 0—255 to 50—255.
 Efface Layer: Decreases the cost wherever the robot drives.
