@@ -159,6 +159,22 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
 
       int old_cost = master_grid.getCost(i, j); //Doesn't seem to be updating really
       if ((old_cost - costmap_[index]) < 0) { //Possibly because of that
+        bool done = false;
+        int current_cost = costmap_[index];
+        int counter = 0;
+        while (!done && counter < 10) {
+          if (old_cost - current_cost >= 0) {
+            master_grid.setCost(i, j, old_cost - current_cost); //Sets the cost in the current location to the previous cost in this location, minus the cost set for this layer in the updateBounds method
+            done = true;
+            counter++;
+          } else {
+            current_cost = current_cost/2;
+            counter++;
+          }
+        }
+        if (counter == 10) {
+          master_grid.setCost(i, j, 0); //Sets the cost in the current location to the previous cost in this location, minus the cost set for this layer in the updateBounds method
+        }
         continue;
       } else if (old_cost > LETHAL_OBSTACLE - 20) {
         continue;

@@ -7,6 +7,9 @@ PLUGINLIB_EXPORT_CLASS(wagon_rut_costmap_namespace::LoadOldLayer, costmap_2d::La
 using costmap_2d::NO_INFORMATION;
 using costmap_2d::LETHAL_OBSTACLE;
 
+const int side_of_map = 200;
+
+
 //Updates which map file should be loaded based off of whether the map was last saved as map_a or map_b
 bool update_filename_load()
 {
@@ -46,15 +49,15 @@ vector<string> vector_of_costs(bool map_a, string file_name)
 }
 
 //Takes in a vector of strings representing integers (such as the kind of vector returned by the above function) and converts it to a 200x200 array of integers
-array<array<int, 200>, 200> array_of_costs(vector<string> vect)
+array<array<int, side_of_map>, side_of_map> array_of_costs(vector<string> vect)
 {
-  array<array<int, 200>, 200> arr;
+  array<array<int, side_of_map>, side_of_map> arr;
   int row = 0;
   int col = 0;
   for (int i = 0; i < vect.size(); i++)
   {
     arr[row][col] = stoi(vect.at(i));
-    if (col == 199) {
+    if (col == side_of_map - 1) {
       row = row + 1;
       col = 0;
     } else {
@@ -110,10 +113,10 @@ namespace wagon_rut_costmap_namespace
     if (!enabled_)
       return;
 
-    *min_x = std::min(*min_x, 0.0);
-    *min_y = std::min(*min_y, 0.0);
-    *max_x = std::max(*max_x, 200.0);
-    *max_y = std::max(*max_y, 200.0);
+    // *min_x = std::min(*min_x, 0.0);
+    // *min_y = std::min(*min_y, 0.0);
+    // *max_x = std::max(*max_x, 200.0);
+    // *max_y = std::max(*max_y, 200.0);
   }
 
   void LoadOldLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int min_j, int max_i, int max_j)
@@ -125,7 +128,8 @@ namespace wagon_rut_costmap_namespace
     vector<string>::const_iterator first = old_cost_vector.begin() + 4;
     vector<string>::const_iterator last = old_cost_vector.end() - 1;
     vector<string> new_vec(first, last);
-    array<array<int, 200>, 200> old_costs = array_of_costs(new_vec);
+    // side_of_map = sqrt(new_vec.size());
+    array<array<int, side_of_map>, side_of_map> old_costs = array_of_costs(new_vec);
 
 
     for (int j = min_j; j < max_j; j++) //Iterates through the entire costmap

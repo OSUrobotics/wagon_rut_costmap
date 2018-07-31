@@ -10,6 +10,7 @@
 #include <array>
 #include <iostream>     // std::cout
 #include <sstream>      // std::istringstream
+#include <math.h>
 
 using namespace std;
 
