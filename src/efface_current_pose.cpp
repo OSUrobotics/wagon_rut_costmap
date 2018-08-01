@@ -116,7 +116,7 @@ void EffaceLayer::updateBounds(double robot_x, double robot_y, double robot_yaw,
 
   if(worldToMap(mark_x, mark_y, mx, my)){ //Checks that the location to change is a valid location on the map
     int cost = getCost(mx, my);
-    setCost(mx, my, 20); //Sets the value to 20 in this location on the layer
+    setCost(mx, my, 50); //Sets the value to 20 in this location on the layer
 
 
     for (int i = 1; i < 5; i++) {
@@ -127,7 +127,7 @@ void EffaceLayer::updateBounds(double robot_x, double robot_y, double robot_yaw,
         if (t > 175 & t < 185) {
           setCost(x, y, 20);
         } else {
-          setCost(x, y, -4*i + 20); //Sets up a decreasing cost radiating out from the robot starting from 20 at the point of the robot
+          setCost(x, y, -10*i + 50); //Sets up a decreasing cost radiating out from the robot starting from 20 at the point of the robot
         }
       }
     }
@@ -173,13 +173,15 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
           }
         }
         if (counter == 10) {
+          ROS_INFO_STREAM("here");
           master_grid.setCost(i, j, 0); //Sets the cost in the current location to the previous cost in this location, minus the cost set for this layer in the updateBounds method
         }
         continue;
       } else if (old_cost > LETHAL_OBSTACLE - 20) {
         continue;
       } else {
-        // master_grid.setCost(i, j, 0);
+        // master_grid.setCost(i, j, 20);
+        ROS_INFO_STREAM("line 184");
         master_grid.setCost(i, j, old_cost - costmap_[index]); //Sets the cost in the current location to the previous cost in this location, minus the cost set for this layer in the updateBounds method
       }
     }

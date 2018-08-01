@@ -82,4 +82,5 @@
   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop">
     <remap from="cmd_vel" to="cmd_vel_mux/input/teleop"/>
   </node>
+  <!-- <node pkg = "wagon_rut_costmap" type = "circle" name="circle"/> -->
 </launch>
