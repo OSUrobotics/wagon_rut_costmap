@@ -34,10 +34,10 @@ window
 # load an environment bitmap
 floorplan
 (
-  name "map"
-  bitmap "map.pgm"
-  size [10.0 10.0 0.5]
-  pose [ 0.0 0.000 0 180.000 ]
+  name "sargas"
+  bitmap "sargas.png"
+  size [40.0 40.0 0.5]
+  pose [ -20 20.00 0 90.000 ]
 )
 
 # throw in a robot
@@ -46,7 +46,7 @@ floorplan
 # throw in a robot
 turtlebot
 (
-  pose [ 0.0 4.5 0 180.000 ]
+  pose [ -2 2 0 90.000 ]
   name "turtlebot"
-  color "purple"
+  color "black"
 )

@@ -42,10 +42,10 @@ namespace wagon_rut_costmap_namespace
       if (!enabled_)
         return;
 
-      *min_x = std::min(*min_x, 0.0);
-      *min_y = std::min(*min_y, 0.0);
-      *max_x = std::max(*max_x, 200.0);
-      *max_y = std::max(*max_y, 200.0);
+      // *min_x = std::min(*min_x, 0.0);
+      // *min_y = std::min(*min_y, 0.0);
+      // *max_x = std::max(*max_x, 200.0);
+      // *max_y = std::max(*max_y, 200.0);
     }
 
     void CompressLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int min_j, int max_i, int max_j)

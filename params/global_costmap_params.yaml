@@ -10,5 +10,5 @@
     - {name: obstacle_layer,          type: "costmap_2d::VoxelLayer"}
     - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}
     - {name: compress_cost_range,     type: "wagon_rut_costmap_namespace::CompressLayer"}
-    - {name: load_old_map,            type: "wagon_rut_costmap_namespace::LoadOldLayer"}
+    # - {name: load_old_map,            type: "wagon_rut_costmap_namespace::LoadOldLayer"}
     - {name: efface_current_pose,     type: "wagon_rut_costmap_namespace::EffaceLayer"}

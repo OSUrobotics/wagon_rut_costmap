@@ -132,12 +132,10 @@ void EffaceLayer::updateBounds(double robot_x, double robot_y, double robot_yaw,
       }
     }
   }
+  // saveMap("/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm");
 
   //Currently just updating the bounds to change to be the entire map
-  *min_x = std::min(*min_x, 0.0);
-  *min_y = std::min(*min_y, 0.0);
-  *max_x = std::max(*max_x, 200.0);
-  *max_y = std::max(*max_y, 200.0);
+
 
 }
 
@@ -159,6 +157,7 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
 
       int old_cost = master_grid.getCost(i, j); //Doesn't seem to be updating really
       if ((old_cost - costmap_[index]) < 0) { //Possibly because of that
+        // master_grid.setCost(i, j, old_cost + costmap_[index]);
         bool done = false;
         int current_cost = costmap_[index];
         int counter = 0;
@@ -173,7 +172,7 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
           }
         }
         if (counter == 10) {
-          ROS_INFO_STREAM("here");
+          // ROS_INFO_STREAM("here");
           master_grid.setCost(i, j, 0); //Sets the cost in the current location to the previous cost in this location, minus the cost set for this layer in the updateBounds method
         }
         continue;
@@ -181,7 +180,7 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
         continue;
       } else {
         // master_grid.setCost(i, j, 20);
-        ROS_INFO_STREAM("line 184");
+        // master_grid.setCost(i, j, old_cost + costmap_[index]);
         master_grid.setCost(i, j, old_cost - costmap_[index]); //Sets the cost in the current location to the previous cost in this location, minus the cost set for this layer in the updateBounds method
       }
     }

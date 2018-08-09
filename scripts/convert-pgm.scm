@@ -1,0 +1,6 @@
+(define (convert-pgm  filename outfile)
+   (let* ((image (car (gimp-file-load RUN-NONINTERACTIVE filename filename)))
+          (drawable (car (gimp-image image)))
+     )
+     (file-pgm-save RUN-NONINTERACTIVE image drawable outfile outfile)
+     (gimp-image-delete image)))

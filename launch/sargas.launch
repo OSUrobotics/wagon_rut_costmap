@@ -14,8 +14,8 @@
   <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
 
   <!-- Name of the map to use (without path nor extension) and initial position -->
-  <arg name="map_file"       default=" $(find wagon_rut_costmap)/world_files/blank_map.yaml"/> <!-- robopark_plan -->
-  <arg name="world_file"     default=" $(find wagon_rut_costmap)/world_files/blank_map.world"/>
+  <arg name="map_file"       default=" $(find wagon_rut_costmap)/world_files/sargas.yaml"/> <!-- robopark_plan -->
+  <arg name="world_file"     default=" $(find wagon_rut_costmap)/world_files/sargas.world"/>
   <arg name="initial_pose_x" default="2.0"/>
   <arg name="initial_pose_y" default="2.0"/>
   <arg name="initial_pose_a" default="0.0"/>

@@ -1,0 +1,8 @@
+image: test_map.pgm
+resolution: 0.050000
+origin: [-13.800000, -12.200000, 0.000000]
+negate: 0
+occupied_thresh: 0.9
+free_thresh: 0.196
+
+#https://github.com/pirobot/ros-by-example/blob/master/rbx_vol_1/rbx1_nav/maps/test_map.yaml
