@@ -1,7 +1,7 @@
 from PIL import Image
 
-effaced = Image.open('three_rooms_full_effaced.pgm')
-clean = Image.open('clean_three_rooms.pgm')
+effaced = Image.open('another_map_full_effaced.pgm')
+clean = Image.open('clean_another_map.pgm')
 out = Image.new('L', effaced.size)
 
 width, height = effaced.size
@@ -13,4 +13,4 @@ for x in range(200):
         new = clean_pixel - effaced_pixel
         out.putpixel((x, y), new)
 
-out.save('three_rooms_output.pgm')
+out.save('another_map_output.pgm')
