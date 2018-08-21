@@ -60,13 +60,17 @@ void EffaceLayer::onInitialize()
   dsrv_->setCallback(cb);
 
   //The following block of code sets up the system to save the costmap to alternating locations upon each launch
-  map_a = update_filename();
-  if (map_a) {
-    file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm";
+  // map_a = update_filename();
+  // if (map_a) {
+  //   file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm";
+  // } else {
+  //   file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm";
+  // }
+  if (nh.getParam("costmap_path", file_name)) {
+    ROS_INFO_STREAM(file_name);
   } else {
-    file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm";
+    ROS_INFO_STREAM("Life: not so good afterall.");
   }
-
   //This variable determines whether the robot is moving, so that the robot will not create wagon ruts when it is still
   moving = false;
   //It then subscribes to the velocity topic
@@ -185,6 +189,7 @@ void EffaceLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
       }
     }
   }
+  
   master_grid.saveMap(file_name);
 }
 }

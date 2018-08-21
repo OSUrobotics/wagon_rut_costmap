@@ -5,6 +5,8 @@
    publish_frequency: 0.5
    static_map: true
    transform_tolerance: 0.5
+   # costmap_path: "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm"
+
    plugins: #Comment out layers below to disable them. Effacement layer won't work properly if compression layer is disabled. The load_old_map layer will reload the previously saved costmap. In order for this to work, run the node once without the load_old_map layer before including it.
     - {name: static_layer,            type: "costmap_2d::StaticLayer"}
     - {name: obstacle_layer,          type: "costmap_2d::VoxelLayer"}

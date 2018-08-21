@@ -14,12 +14,11 @@
   <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
 
   <!-- Name of the map to use (without path nor extension) and initial position -->
-  <arg name="map_file"       default=" $(find wagon_rut_costmap)/world_files/blank_map.yaml"/> <!-- robopark_plan -->
-  <arg name="world_file"     default=" $(find wagon_rut_costmap)/world_files/blank_map.world"/>
+  <arg name="map_file"       default=" $(env TURTLEBOT_STAGE_MAP_FILE)"/> <!-- robopark_plan -->
+  <arg name="world_file"     default=" $(env TURTLEBOT_STAGE_WORLD_FILE)"/>
   <arg name="initial_pose_x" default="2.0"/>
   <arg name="initial_pose_y" default="2.0"/>
   <arg name="initial_pose_a" default="0.0"/>
-  <!-- <arg name="costmap_path" default="/home/strider/catkin_ws/src/wagon_rut_costmap/experiment.pgm"/> -->
 
   <param name="/use_sim_time" value="true"/>
   <!--  ******************** Stage ********************  -->
@@ -63,9 +62,7 @@
 
   <!--  ************** Navigation  ***************  -->
   <!-- <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/> -->
-  <include file="$(find wagon_rut_costmap)/launch/turtlebot_nav_movebase.launch.xml" args="costmap_path"/>
-  <!-- <param name="move_base/costmap_path" value="$(arg costmap_path)"/> -->
-
+  <include file="$(find wagon_rut_costmap)/launch/turtlebot_nav_movebase.launch.xml"/>
 
   <!--  ****** Maps *****  -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
@@ -85,5 +82,4 @@
   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop">
     <remap from="cmd_vel" to="cmd_vel_mux/input/teleop"/>
   </node>
-  <!-- <node pkg = "wagon_rut_costmap" type = "circle" name="circle"/> -->
 </launch>

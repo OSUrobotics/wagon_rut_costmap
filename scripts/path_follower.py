@@ -179,7 +179,7 @@ def main():
 	rospy.init_node('patrol_state_machine')
 
 	#Open CSV File
-	with open('output.csv', 'rb') as f:
+	with open('/home/strider/catkin_ws/src/wagon_rut_costmap/scripts/output.csv', 'rb') as f:
 		reader = csv.reader(f)
 		for row in reader:
 			waypoint_list.append(row)

@@ -19,6 +19,7 @@ base_local_planner: "dwa_local_planner/DWAPlannerROS"
 
 base_global_planner: "navfn/NavfnROS" #alternatives: global_planner/GlobalPlanner, carrot_planner/CarrotPlanner
 
+# costmap_path: "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm"
 
 #We plan to integrate recovery behaviors for turtlebot but currently those belong to gopher and still have to be adapted.
 ## recovery behaviors; we avoid spinning, but we need a fall-back replanning

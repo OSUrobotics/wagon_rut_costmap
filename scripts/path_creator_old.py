@@ -2,55 +2,31 @@
 import roslib
 # roslib.load_manifest('intro_nav')
 import rospy
-from geometry_msgs.msg import Quaternion, PoseStamped, Pose, Point
+from geometry_msgs.msg import PoseStamped
 import csv
 import time
-from std_msgs.msg import Header
-import random
 
 class point_saver:
 	def __init__(self):
 		self.state_count = 0
 		rospy.loginfo('Start Init')
 		#Goal Subscriber
-		# self.move_base_sub = rospy.Subscriber('/move_base_simple/goal',PoseStamped, self.move_base_callback)
-		#Goal publisher
+		self.move_base_pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, 10)
+
+		self.move_base_sub = rospy.Subscriber('/move_base_simple/goal',PoseStamped,self.move_base_callback)
 		# self.move_base_pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, 10)
-		# for i in range(15):
-		# 	time.sleep(5.5)
-		# 	self.generate_point()
-		# self.generate_point()
+
 		self.point_array = []
 		rospy.loginfo('End Init')
 		#Open and write over output.csv
-		self.outputFile = open('/home/strider/catkin_ws/src/wagon_rut_costmap/scripts/output.csv', 'w')
+		self.outputFile = open('output.csv', 'w')
 		self.outputWriter = csv.writer(self.outputFile)
-
-		for i in range(40):
-			# time.sleep(1)
-			self.generate_point(i)
-		# self.outputWriter = csv.writer(self.outputFile)
-
 		# self.outputWriter.writerow(['frame_id','x_point','y_point','point_z','x_quad','quad_y','z_quad','w_quad'])
 
 		# with open('points.csv', 'w') as csvfile:
 		# 	fieldnames = ['frame_id', 'x_point', 'y_point', 'z_point', 'x_quad', 'y_quad', 'z_quad', 'w_quad']
     	# 	self.writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 		# self.writer.writeheader()
-	def generate_point(self, seq):
-		#generate random PoseStamped, and publish to move_base_simple/goal topic
-		print "Got to 35"
-		pose = PoseStamped()
-		pose.header = Header()
-		pose.header.seq = seq
-		pose.header.frame_id = "map"
-		pose.header.stamp = rospy.Time.now()
-		pose.pose.position = Point(random.uniform(0.0, 20.0), random.uniform(0.0, 20.0), 0.0)
-		pose.pose.orientation = Quaternion(0.0, 0.0, random.uniform(0.0, 1.0), random.uniform(0.0, 1.0))
-		# self.move_base_pub.publish(pose)
-		self.move_base_callback(pose)
-
-
 
 	def move_base_callback(self, move_base_point):
 		print "Point Found"
@@ -67,7 +43,6 @@ class point_saver:
 		# self.outputWriter.writerow({'frame_id':frame_id,'x_point':point_x,'y_point':point_y,'point_z':point_z,'x_quad':quad_x,'y_quad':quad_y,'z_quad':quad_z,'w_quad':quad_w})
 		#Writing point to CSV
 		self.outputWriter.writerow([self.state_count,frame_id,point_x,point_y,point_z,quad_x,quad_y,quad_z,quad_w])
-		# self.outputWriter.writerow("here")
 		print frame_id
 		#Incrementing Waypoint Number
 		self.state_count = self.state_count + 1
