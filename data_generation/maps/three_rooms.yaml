@@ -1,4 +1,4 @@
-image: three_rooms.png
+image: three_rooms.pgm
 resolution: 0.1
 origin: [0.0, 0.0, 0.0]
 negate: 0

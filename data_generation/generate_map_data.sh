@@ -19,25 +19,12 @@ sed -i -e 's/__example/'$1'/g' ../launch/clean$1.launch.xml
 
 #Make clean map
 roslaunch wagon_rut_costmap clean$1.launch map_file:="/home/strider/catkin_ws/src/wagon_rut_costmap/data_generation/maps/"$1.yaml world_file:="/home/strider/catkin_ws/src/wagon_rut_costmap/data_generation/world_files/"$1.world &
-# pids= pgrep -f /opt/ros/kinetic/lib/rosout/rosout
-# echo $pids
 sleep 7
-# kill -9 $PID
-# killall roslaunch
-# kill $(pgrep command)
-# kill -s KILL -- -gpid
-# killall -9 "teleop-14"
-# kill -9 $pids
-# pgrep -f /opt/ros/kinetic/lib/rosout/rosout
-# xargs kill -9
-# killall -9 /opt/ros/kinetic/lib/rosout/rosout
 killall -9 roscore
 sleep 2
 killall -9 rviz
 killall -9 stageros
 killall -9 joint_state_publisher
-# sleep 2
-# echo "GOT TO 32"
 
 #Make launch files for effaced map
 cp effaced__example.launch ../launch/effaced$1.launch
@@ -48,7 +35,6 @@ sed -i -e 's/__example/'$1'/g' ../launch/effaced$1.launch.xml
 #Make effaced map
 roslaunch wagon_rut_costmap effaced$1.launch map_file:="/home/strider/catkin_ws/src/wagon_rut_costmap/data_generation/maps/"$1.yaml world_file:="/home/strider/catkin_ws/src/wagon_rut_costmap/data_generation/world_files/"$1.world &
 sleep 2
-# cd ~/catkin_ws
 rosrun wagon_rut_costmap path_creator.py &
 PID=$!
 sleep 1
@@ -56,7 +42,7 @@ kill -SIGINT $PID
 sleep 1
 rosrun wagon_rut_costmap path_follower.py &
 PID_follow=$!
-sleep 3600 #Change to be 7200 ish
+sleep 3600 #Change to be number of seconds you want to simulate the robot driving
 kill -9 $PID_follow
 killall -9 roscore
 sleep 2
@@ -72,5 +58,3 @@ python ../scripts/subtract_pgm.py /home/strider/catkin_ws/src/wagon_rut_costmap/
 
 #Rotate original map
 convert maps/$1.pgm -flip input/$1.pgm
-
-#Figure out how to run this on an entire folder of maps, plus make those maps 200x200
