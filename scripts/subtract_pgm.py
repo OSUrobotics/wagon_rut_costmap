@@ -1,7 +1,10 @@
-from PIL import Image
+#!/usr/bin/python
 
-effaced = Image.open('another_map_full_effaced.pgm')
-clean = Image.open('clean_another_map.pgm')
+from PIL import Image
+import sys
+
+effaced = Image.open(sys.argv[1])
+clean = Image.open(sys.argv[2])
 out = Image.new('L', effaced.size)
 
 width, height = effaced.size
@@ -13,4 +16,4 @@ for x in range(200):
         new = clean_pixel - effaced_pixel
         out.putpixel((x, y), new)
 
-out.save('another_map_output.pgm')
+out.save(sys.argv[3])

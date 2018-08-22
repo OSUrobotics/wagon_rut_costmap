@@ -92,6 +92,8 @@ class patrol_state(smach.State):
 		# print userdata.patrol_waypoints_in
 		goal_pose = MoveBaseGoal()
 		goal_pose.target_pose.header.stamp = rospy.Time.now()
+		# print(userdata.patrol_waypoints_in)
+		# print(userdata.patrol_waypoint_num_in)
 		goal_pose.target_pose.header.frame_id = userdata.patrol_waypoints_in[userdata.patrol_waypoint_num_in][1]
 		goal_pose.target_pose.pose.position.x = float(userdata.patrol_waypoints_in[userdata.patrol_waypoint_num_in][2])
 		goal_pose.target_pose.pose.position.y = float(userdata.patrol_waypoints_in[userdata.patrol_waypoint_num_in][3])

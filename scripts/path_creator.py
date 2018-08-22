@@ -45,7 +45,7 @@ class point_saver:
 		pose.header.seq = seq
 		pose.header.frame_id = "map"
 		pose.header.stamp = rospy.Time.now()
-		pose.pose.position = Point(random.uniform(0.0, 20.0), random.uniform(0.0, 20.0), 0.0)
+		pose.pose.position = Point(random.uniform(1.0, 19.0), random.uniform(1.0, 19.0), 0.0)
 		pose.pose.orientation = Quaternion(0.0, 0.0, random.uniform(0.0, 1.0), random.uniform(0.0, 1.0))
 		# self.move_base_pub.publish(pose)
 		self.move_base_callback(pose)
@@ -85,5 +85,5 @@ if __name__ == '__main__':
 	rospy.init_node('path_saver',log_level=rospy.DEBUG)
 	point_saver = point_saver()
 	#Call to function on node shutdown
-	rospy.on_shutdown(point_saver.shutdown_hook)
+	rospy.on_shutdown(point_saver.shutdown_hook) #Need outputFile to be closed even if it does -9 shutdown
 	rospy.spin()

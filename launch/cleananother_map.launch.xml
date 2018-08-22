@@ -2,7 +2,7 @@
     ROS navigation stack with velocity smoother and safety (reactive) controller
 -->
 <launch>
-  <arg name="costmap_path" default="$(find wagon_rut_costmap)/.pgm"/>
+  <arg name="costmap_path" default="$(find wagon_rut_costmap)/data_generation/clean_costmaps/another_map.pgm"/>
 
   <include file="$(find turtlebot_navigation)/launch/includes/velocity_smoother.launch.xml"/>
   <include file="$(find turtlebot_navigation)/launch/includes/safety_controller.launch.xml"/>

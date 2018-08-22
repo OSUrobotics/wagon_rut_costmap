@@ -1,0 +1,49 @@
+<!--
+    ROS navigation stack with velocity smoother and safety (reactive) controller
+-->
+<launch>
+  <arg name="costmap_path" default="$(find wagon_rut_costmap)/data_generation/effaced_costmaps/another_map.pgm"/>
+
+  <include file="$(find turtlebot_navigation)/launch/includes/velocity_smoother.launch.xml"/>
+  <include file="$(find turtlebot_navigation)/launch/includes/safety_controller.launch.xml"/>
+
+  <arg name="odom_frame_id"   default="odom"/>
+  <arg name="base_frame_id"   default="base_footprint"/>
+  <arg name="global_frame_id" default="map"/>
+  <arg name="odom_topic" default="odom" />
+  <arg name="laser_topic" default="scan" />
+  <arg name="custom_param_file" default="$(find turtlebot_navigation)/param/dummy.yaml"/>
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find wagon_rut_costmap)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find wagon_rut_costmap)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find wagon_rut_costmap)/params/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find wagon_rut_costmap)/params/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find wagon_rut_costmap)/params/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find wagon_rut_costmap)/params/move_base_params.yaml" command="load" />
+    <rosparam file="$(find wagon_rut_costmap)/params/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find wagon_rut_costmap)/params/navfn_global_planner_params.yaml" command="load" />
+
+		<!-- Added Rosparam For Custom Costmap -->
+		<!-- <rosparam file="$(find costmap_turtlebot)/launch/plugins.yaml" command="load" ns="/mover/global_costmap" /> -->
+
+    <!-- external params file that could be loaded into the move_base namespace -->
+    <rosparam file="$(arg custom_param_file)" command="load" />
+
+    <!-- reset frame_id parameters using user input data -->
+    <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="local_costmap/global_frame" value="$(arg odom_frame_id)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="DWAPlannerROS/global_frame_id" value="$(arg odom_frame_id)"/>
+    <param name="costmap_path" value="$(arg costmap_path)"/>
+
+    <!-- <param name="costmap_path" value="/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm"/> -->
+
+    <!-- <param name="global_costmap/costmap_path" value="$(arg costmap_path)"/> -->
+
+    <remap from="cmd_vel" to="navigation_velocity_smoother/raw_cmd_vel"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="scan" to="$(arg laser_topic)"/>
+  </node>
+</launch>
