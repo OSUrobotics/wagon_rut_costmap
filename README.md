@@ -25,4 +25,5 @@ Load Old Layer: Loads in the previous costmap.
 Each of these layers depends on the previous one. The effacement layer only works if the compression layer is also running, because only non-zero values can be decreased. The "load old" layer only works if the efface layer has been run at least once before, because it loads in costs saved by the efface layer. It itself is necessary in order to continue making progress on wearing out the wagon ruts instead of starting fresh with each launch.
 
 Data generation:
+
 The data generation branch includes a folder with all the necessary files to generate simulation data on a folder of map pgms and yaml files.
