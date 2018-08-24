@@ -85,11 +85,17 @@ namespace wagon_rut_costmap_namespace
     dsrv_->setCallback(cb);
 
     // This block of code determines which file the costmap is read in from
-    map_a = update_filename_load();
-    if (map_a) {
-      file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm";
+    // map_a = update_filename_load();
+    // if (map_a) {
+    //   file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_b.pgm";
+    // } else {
+    //   file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm";
+    // }
+
+    if (nh.getParam("costmap_path", file_name)) {
+      ROS_INFO_STREAM(file_name);
     } else {
-      file_name = "/home/strider/catkin_ws/src/wagon_rut_costmap/maps/map_a.pgm";
+      ROS_INFO_STREAM("Life: not so good afterall.");
     }
   }
 
