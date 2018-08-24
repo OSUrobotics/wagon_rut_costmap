@@ -1,6 +1,6 @@
 # wagon_rut_costmap
 
-This repository implements a "wagon rut" layer for the ROS navigation stack costmap. This means that the cost in each location where the robot drives decreases a small amount, ultimately creating a "wagon rut" effect on the costmap, which will encourage the robot to retrace its own path in future path planning. The ultimate goal of this layer is to allow robots to navigate human spaces more naturally, by matching their autonomous path planning to paths humans have previously driven them on.
+This repository implements a "wagon rut" layer for the ROS navigation stack costmap. This means that the cost in each location where the robot drives decreases a small amount, ultimately creating a "wagon rut" effect on the costmap, which will encourage the robot to retrace its own path in future path planning. The ultimate goal of this layer is to allow robots to navigate human spaces more naturally, by matching their autonomous path planning to paths humans have previously driven them on. For more details see the Wiki. 
 
 
 
